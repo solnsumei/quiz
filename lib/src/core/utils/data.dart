@@ -1,5 +1,5 @@
-import 'models/question.dart';
-import 'models/subject.dart';
+import '../models/question.dart';
+import '../models/subject.dart';
 
 
 final htmlQuestions = [
@@ -33,7 +33,7 @@ final htmlQuestions = [
   ),
   Question(5,
     "Choose the correct hyperlink in HTML?",
-    2, [
+    0, [
       '<a href="www.javatpoint.com"> javaTpoint.com </a>',
       '<a url="www.javatpoint.com" javaTpoint.com /a>',
       '<a link="www.javatpoint.com"> javaTpoint.com </a>',
@@ -69,6 +69,6 @@ final phpQuestions = [
 ];
 
 final List<Subject> subjects = [
-  Subject(1, "HTML", "icon", htmlQuestions),
-  Subject(2, "PHP", "icon", phpQuestions),
+  Subject(1, "HTML", "html_logo.png", htmlQuestions),
+  Subject(2, "PHP", "php_logo.png", phpQuestions),
 ];

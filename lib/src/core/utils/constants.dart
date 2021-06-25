@@ -1,0 +1,1 @@
+const String QUIZ_BOX = "quizBox";
