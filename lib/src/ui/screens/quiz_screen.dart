@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/providers/quiz_provider.dart';
 import 'result_screen.dart';
+import '../widgets/constants.dart';
 
 
 class QuizScreen extends StatelessWidget {
@@ -27,26 +28,14 @@ class QuizScreen extends StatelessWidget {
                   Row(
                     children: [
                       Text('Question',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[800],
-                        ),
+                        style: kDarkTextStyle,
                       ),
                       SizedBox(width: 4.0),
                       Text('${quiz.questionIndex + 1}',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[800],
-                        ),
+                        style: kDarkTextStyle.copyWith(fontSize: 22),
                       ),
                       Text('/${quiz.questionList.length}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[600],
-                        ),
+                        style: kNormalTextStyle.copyWith(fontSize: 18),
                       ),
                     ],
                   ),
@@ -72,14 +61,10 @@ class QuizScreen extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
               width: double.infinity,
               child: Text(question.question,
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
-                ),
+                style: kDarkTextStyle.copyWith(fontSize: 18),
               ),
             ),
             SizedBox(height: 25.0),
@@ -93,7 +78,10 @@ class QuizScreen extends StatelessWidget {
                   return Container(
                     margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
                     decoration: BoxDecoration(
-                      border: Border.all(width: 0.5),
+                      border: Border.all(
+                        width: isSelected ? 1.5 : 0.8,
+                        color: isSelected ? Colors.green : Colors.grey,
+                      ),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15.0),
                         bottomRight: Radius.circular(15.0),
@@ -105,7 +93,7 @@ class QuizScreen extends StatelessWidget {
                           : Icons.check_circle_rounded,
                           color: isSelected ? Colors.green: Colors.grey),
                       title: Text(question.answers[index],
-                          style: TextStyle(fontSize: 14.0)),
+                          style: TextStyle(fontSize: 15.0)),
                       enableFeedback: true,
                       onTap: () {
                         quiz.selectAnswer(index);
@@ -130,7 +118,7 @@ class QuizScreen extends StatelessWidget {
                          } : null,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          vertical: 12.0,
+                          vertical: 16.0,
                           horizontal: 20.0,
                         ),
                         child: Text('Next'),

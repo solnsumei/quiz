@@ -60,7 +60,7 @@ final phpQuestions = [
   ),
   Question(4,
     "Which of the following is used to display the output in PHP?",
-    2, ["echo", "write", "stdout", "Both (a) and (c)"],
+    0, ["echo", "write", "stdout", "Both (a) and (c)"],
   ),
   Question(5,
     "Which of the following is used for concatenation in PHP?",

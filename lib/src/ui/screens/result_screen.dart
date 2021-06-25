@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import '../../core/providers/quiz_provider.dart';
+import '../widgets/constants.dart';
 
 
 class ResultScreen extends StatelessWidget {
@@ -8,14 +9,6 @@ class ResultScreen extends StatelessWidget {
 
   void gotoHomeScreen(BuildContext context) {
     Navigator.popUntil(context, ModalRoute.withName('/home'));
-  }
-
-  String resultMessage(int score) {
-    if (score >= 3) {
-      return 'CONGRATULATIONS';
-    }
-
-    return 'YOU FAILED';
   }
 
   @override
@@ -38,60 +31,41 @@ class ResultScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 width: double.infinity,
-                child: Image.asset(quiz.score >= 3
+                child: Image.asset(quiz.passScore()
                     ? 'images/icon_winner.png'
                     : 'images/icon_loss.png', height: 150),
               ),
-              Text(resultMessage(quiz.score),
-                  style: TextStyle(
+              Text(quiz.resultMessage(),
+                  style: kBoldDarkTextStyle.copyWith(
                     fontSize: 22,
-                    fontWeight: FontWeight.w700,
-                    color: quiz.score >= 3 ? Colors.green : Colors.red,
+                    color: quiz.passScore() ? Colors.green : Colors.red,
                   ),
                 ),
               SizedBox(height: 40.0),
               Text('YOU SCORED',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[600],
-                ),
+                style: kNormalTextStyle,
               ),
               SizedBox(height: 10.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('${quiz.score}',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey[800],
-                    ),
+                    style: kBoldDarkTextStyle.copyWith(fontSize: 30.0),
                   ),
-                  Text('/${quizSubject.questions.length}',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey[600],
+                  Text(' / ${quiz.numberOfQuestions}',
+                    style: kNormalTextStyle.copyWith(
+                      fontSize: 30.0,
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 30.0),
               Text('DURATION',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.grey[600],
-                ),
+                style: kNormalTextStyle,
               ),
               SizedBox(height: 8.0),
               Text('${quiz.quizDuration()} secs',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
-                ),
+                style: kDarkTextStyle,
               ),
               SizedBox(height: 10.0),
               Spacer(),
@@ -112,12 +86,12 @@ class ResultScreen extends StatelessWidget {
                             fontSize: 20,
                           ),
                           padding: const EdgeInsets.symmetric(
-                            vertical: 12.0,
+                            vertical: 16.0,
                             horizontal: 20.0,
                           ),
                         ),
                         icon: Icon(Icons.share, size: 16.0,),
-                        label: Text('Share', style: TextStyle(
+                        label: Text('Share Result', style: TextStyle(
                           fontSize: 16.0,
                         ),),
                       ),
@@ -131,7 +105,7 @@ class ResultScreen extends StatelessWidget {
                           },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 12.0,
+                            vertical: 16.0,
                             horizontal: 20.0,
                           ),
                           child: Text('Retake Quiz'),

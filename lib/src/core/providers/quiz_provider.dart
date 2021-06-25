@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import '../models/subject.dart';
 import '../models/question.dart';
 import '../utils/data.dart';
-// import '../utils/constants.dart';
+import '../utils/helpers.dart';
+
 
 class QuizProvider with ChangeNotifier {
   int? _selectedSubjectIndex;
@@ -20,6 +21,7 @@ class QuizProvider with ChangeNotifier {
   List<Subject> get subjectList => subjects;
 
   Subject get selectedQuizSubject => subjects[_selectedSubjectIndex!];
+  int get numberOfQuestions => selectedQuizSubject.questions.length;
 
   void selectQuizSubject(int index) {
     clearValues();
@@ -94,6 +96,14 @@ class QuizProvider with ChangeNotifier {
     clearValues();
     _selectedSubjectIndex = null;
     notifyListeners();
+  }
+
+  bool passScore() {
+    return (score * 100.0 / selectedQuizSubject.questions.length) > 50.0;
+  }
+
+  String resultMessage() {
+    return computeResultMessage(passScore());
   }
 
   static of(BuildContext context, {bool listen: true}) {
